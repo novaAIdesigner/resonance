@@ -5,6 +5,7 @@ import ScenarioGrid from '../components/ScenarioGrid'
 import TestimonialCarousel from '../components/TestimonialCarousel'
 import ValueCards from '../components/ValueCards'
 import { useLocale } from '../context/LocaleContext'
+import talentProgramImage from '../assets/talent-program.png'
 
 export default function HomePage() {
   const { locale } = useLocale()
@@ -67,11 +68,20 @@ export default function HomePage() {
           </article>
         </div>
 
-        <div className="mt-4 rounded-xl border border-cyan-300/15 bg-slate-900/45 p-4">
-          <h3 className="text-lg font-semibold text-white">
-            {locale === 'en' ? 'Performer & Voice Actor Partnership' : '表演者 / 配音演员合作计划'}
+        <div
+          className="mt-4 rounded-xl p-6 text-slate-900"
+          style={{
+            backgroundColor: '#EAF1F7',
+            backgroundImage: `url(${talentProgramImage})`,
+            backgroundPosition: 'right center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'auto 100%',
+          }}
+        >
+          <h3 className="text-lg font-semibold text-slate-900">
+            {locale === 'en' ? 'Talent Performer / Voice Actor Partnership Program' : '天才表演者/配音演员合作计划'}
           </h3>
-          <p className="mt-2 text-sm text-slate-300">
+          <p className="mt-2 max-w-2xl text-sm text-slate-700">
             {locale === 'en'
               ? 'Join voice asset collaborations with revenue sharing, usage authorization guidance, and licensing support.'
               : '开放语音资产合作，提供利润分享、授权使用指导与许可证支持。'}
