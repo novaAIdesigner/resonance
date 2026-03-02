@@ -2,7 +2,10 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { scenarios } from '../data/siteContent'
 import { runDemo } from '../lib/api'
+import MeetingTranscriptionDemo from './MeetingTranscriptionDemo'
 import RealtimeAgentDemo from './RealtimeAgentDemo'
+import SimultaneousInterpretationDemo from './SimultaneousInterpretationDemo'
+import VideoTranslationDemo from './VideoTranslationDemo'
 import VideoVoiceDemo from './VideoVoiceDemo'
 
 export default function ScenarioGrid() {
@@ -10,8 +13,16 @@ export default function ScenarioGrid() {
   const [loading, setLoading] = useState<string | null>(null)
   const realtimeScenarioName = '对话智能体（实时对话）'
   const videoVoiceScenarioName = '视频素材生成（视频播客，配音）'
+  const meetingScenarioName = '会议转写分析'
+  const simultaneousScenarioName = '同声传译'
+  const videoTranslationScenarioName = '视频翻译'
   const otherScenarios = scenarios.filter(
-    (scenario) => scenario.name !== realtimeScenarioName && scenario.name !== videoVoiceScenarioName,
+    (scenario) =>
+      scenario.name !== realtimeScenarioName &&
+      scenario.name !== videoVoiceScenarioName &&
+      scenario.name !== meetingScenarioName &&
+      scenario.name !== simultaneousScenarioName &&
+      scenario.name !== videoTranslationScenarioName,
   )
   const accentStyles = [
     'from-cyan-400/20 via-cyan-400/5 to-transparent',
@@ -51,9 +62,24 @@ export default function ScenarioGrid() {
           <VideoVoiceDemo />
         </article>
 
+        <article className="glass-card relative overflow-hidden p-6">
+          <div className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${accentStyles[2]}`} />
+          <MeetingTranscriptionDemo />
+        </article>
+
+        <article className="glass-card relative overflow-hidden p-6">
+          <div className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${accentStyles[3]}`} />
+          <SimultaneousInterpretationDemo />
+        </article>
+
+        <article className="glass-card relative overflow-hidden p-6">
+          <div className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${accentStyles[4]}`} />
+          <VideoTranslationDemo />
+        </article>
+
         {otherScenarios.map((scenario, index) => (
           <article key={scenario.name} className="glass-card relative overflow-hidden p-6">
-            <div className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${accentStyles[(index + 2) % accentStyles.length]}`} />
+            <div className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${accentStyles[index % accentStyles.length]}`} />
             <div className="relative z-10 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-3xl">
                 <h3 className="text-xl font-semibold text-white">{scenario.name}</h3>
