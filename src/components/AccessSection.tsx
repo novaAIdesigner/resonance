@@ -11,8 +11,8 @@ export default function AccessSection() {
       </h2>
       <p className="mt-2 text-slate-300">
         {locale === 'en'
-          ? 'Choose your path for personal top-up or enterprise Azure management.'
-          : '按个人与企业两类入口快速开始。'}
+          ? 'Start in minutes with personal top-up, or move directly into enterprise-grade Azure governance and scale.'
+          : '可从个人充值快速起步，也可直接进入企业级 Azure 治理与规模化部署。'}
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
         <Link to="/consumer-auth" className="neon-btn inline-block">

@@ -12,7 +12,7 @@ export default function ScenarioGrid() {
   const [results, setResults] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState<string | null>(null)
   const realtimeScenarioName = '对话智能体（实时对话）'
-  const videoVoiceScenarioName = '视频素材生成（视频播客，配音）'
+  const videoVoiceScenarioName = '视频素材生成，配音'
   const meetingScenarioName = '会议转写分析'
   const simultaneousScenarioName = '同声传译'
   const videoTranslationScenarioName = '视频翻译'
@@ -49,7 +49,7 @@ export default function ScenarioGrid() {
     <section>
       <div className="mb-4">
         <h2 className="section-title">应用场景</h2>
-        <p className="mt-2 text-slate-300">每个场景都通过服务端 API 调用，便于访问控制与 2C 计费。</p>
+        <p className="mt-2 text-slate-300">覆盖实时对话、会议分析、同传与视频语音生产，统一通过服务端 API 接入，便于权限治理与商业计费。</p>
       </div>
       <div className="flex flex-col gap-5">
         <article className="glass-card relative overflow-hidden p-6">

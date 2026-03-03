@@ -5,15 +5,46 @@ type VoicePreset = {
   id: string
   name: string
   style: string
+  category: 'hyper-realistic' | 'pro-dubbing'
   gradient: string
 }
 
 const voicePresets: VoicePreset[] = [
-  { id: 'spuds', name: 'Spuds Oxley', style: 'Cinematic Narrator', gradient: 'from-cyan-400 to-purple-500' },
-  { id: 'james', name: 'James', style: 'Husky Storyteller', gradient: 'from-rose-500 to-amber-500' },
-  { id: 'cassidy', name: 'Cassidy', style: 'Crisp Podcaster', gradient: 'from-sky-400 to-fuchsia-500' },
-  { id: 'hope', name: 'Hope', style: 'Social Media', gradient: 'from-blue-400 to-orange-500' },
-  { id: 'michael', name: 'Michael C. Vincent', style: 'Suspenseful Storyteller', gradient: 'from-indigo-500 to-cyan-400' },
+  {
+    id: 'spuds',
+    name: 'Spuds Oxley',
+    style: 'Cinematic Narrator',
+    category: 'hyper-realistic',
+    gradient: 'from-cyan-400 to-purple-500',
+  },
+  {
+    id: 'james',
+    name: 'James',
+    style: 'Husky Storyteller',
+    category: 'pro-dubbing',
+    gradient: 'from-rose-500 to-amber-500',
+  },
+  {
+    id: 'cassidy',
+    name: 'Cassidy',
+    style: 'Crisp Podcaster',
+    category: 'pro-dubbing',
+    gradient: 'from-sky-400 to-fuchsia-500',
+  },
+  {
+    id: 'hope',
+    name: 'Hope',
+    style: 'Social Media',
+    category: 'hyper-realistic',
+    gradient: 'from-blue-400 to-orange-500',
+  },
+  {
+    id: 'michael',
+    name: 'Michael C. Vincent',
+    style: 'Suspenseful Storyteller',
+    category: 'pro-dubbing',
+    gradient: 'from-indigo-500 to-cyan-400',
+  },
 ]
 
 const languageOptions = ['English', '中文', '日本語', 'Español']
@@ -32,6 +63,13 @@ export default function VideoVoiceDemo() {
     [selectedVoiceId],
   )
 
+  const categoryLabel = (category: VoicePreset['category']) => {
+    if (locale === 'en') {
+      return category === 'hyper-realistic' ? 'Hyper-realistic' : 'Professional Dubbing'
+    }
+    return category === 'hyper-realistic' ? '超拟真' : '专业配音'
+  }
+
   function onPlay() {
     setIsPlaying(true)
     setTimeout(() => setIsPlaying(false), 1100)
@@ -42,7 +80,7 @@ export default function VideoVoiceDemo() {
       <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
         <div>
           <h3 className="text-xl font-semibold text-white sm:text-2xl">
-            {locale === 'en' ? 'Video Content Generation (Podcast & Dubbing)' : '视频素材生成（视频播客，配音）'}
+            {locale === 'en' ? 'Video Content Generation (Podcast & Dubbing)' : '视频素材生成，配音'}
           </h3>
           <p className="mt-2 max-w-3xl text-slate-300">
             {locale === 'en'
@@ -71,6 +109,15 @@ export default function VideoVoiceDemo() {
             </select>
           </div>
 
+          <div className="mb-3 flex flex-wrap gap-2 text-xs">
+            <span className="rounded-full border border-cyan-300/25 bg-cyan-400/10 px-2.5 py-1 text-cyan-100">
+              {locale === 'en' ? 'Tag' : '分类'}：{categoryLabel('hyper-realistic')}
+            </span>
+            <span className="rounded-full border border-violet-300/25 bg-violet-400/10 px-2.5 py-1 text-violet-100">
+              {locale === 'en' ? 'Tag' : '分类'}：{categoryLabel('pro-dubbing')}
+            </span>
+          </div>
+
           <div className="space-y-2">
             {voicePresets.map((voice) => {
               const active = voice.id === selectedVoiceId
@@ -85,7 +132,14 @@ export default function VideoVoiceDemo() {
                     <span className={`h-5 w-5 rounded-full bg-gradient-to-r ${voice.gradient}`} />
                     <span className="text-base font-semibold text-white">{voice.name}</span>
                   </span>
-                  <span className="text-sm text-amber-200/90">{voice.style}</span>
+                  <span className="flex items-center gap-2">
+                    <span className="text-sm text-amber-200/90">{voice.style}</span>
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-[11px] ${voice.category === 'hyper-realistic' ? 'bg-cyan-400/15 text-cyan-100' : 'bg-violet-400/15 text-violet-100'}`}
+                    >
+                      {categoryLabel(voice.category)}
+                    </span>
+                  </span>
                 </button>
               )
             })}

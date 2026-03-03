@@ -1,5 +1,20 @@
 import { useState } from 'react'
 import { useLocale } from '../context/LocaleContext'
+import usFlag from '../assets/flags/us.png'
+import deFlag from '../assets/flags/de.png'
+import cnFlag from '../assets/flags/cn.png'
+import esFlag from '../assets/flags/es.png'
+import frFlag from '../assets/flags/fr.png'
+import jpFlag from '../assets/flags/jp.png'
+import krFlag from '../assets/flags/kr.png'
+import ptFlag from '../assets/flags/pt.png'
+import itFlag from '../assets/flags/it.png'
+import saFlag from '../assets/flags/sa.png'
+import inFlag from '../assets/flags/in.png'
+import trFlag from '../assets/flags/tr.png'
+import ruFlag from '../assets/flags/ru.png'
+import vnFlag from '../assets/flags/vn.png'
+import thFlag from '../assets/flags/th.png'
 
 type PresetScenario = {
   id: 'podcast' | 'drama' | 'course'
@@ -10,7 +25,7 @@ type PresetScenario = {
 type LanguageOption = {
   id: string
   label: string
-  flag: string
+  flagIcon: string
 }
 
 const scenarios: PresetScenario[] = [
@@ -20,21 +35,21 @@ const scenarios: PresetScenario[] = [
 ]
 
 const targetLanguages: LanguageOption[] = [
-  { id: 'en', label: 'English', flag: '🇺🇸' },
-  { id: 'de', label: 'German', flag: '🇩🇪' },
-  { id: 'zh', label: 'Chinese', flag: '🇨🇳' },
-  { id: 'es', label: 'Spanish', flag: '🇪🇸' },
-  { id: 'fr', label: 'French', flag: '🇫🇷' },
-  { id: 'ja', label: 'Japanese', flag: '🇯🇵' },
-  { id: 'ko', label: 'Korean', flag: '🇰🇷' },
-  { id: 'pt', label: 'Portuguese', flag: '🇵🇹' },
-  { id: 'it', label: 'Italian', flag: '🇮🇹' },
-  { id: 'ar', label: 'Arabic', flag: '🇸🇦' },
-  { id: 'hi', label: 'Hindi', flag: '🇮🇳' },
-  { id: 'tr', label: 'Turkish', flag: '🇹🇷' },
-  { id: 'ru', label: 'Russian', flag: '🇷🇺' },
-  { id: 'vi', label: 'Vietnamese', flag: '🇻🇳' },
-  { id: 'th', label: 'Thai', flag: '🇹🇭' },
+  { id: 'en', label: 'English', flagIcon: usFlag },
+  { id: 'de', label: 'German', flagIcon: deFlag },
+  { id: 'zh', label: 'Chinese', flagIcon: cnFlag },
+  { id: 'es', label: 'Spanish', flagIcon: esFlag },
+  { id: 'fr', label: 'French', flagIcon: frFlag },
+  { id: 'ja', label: 'Japanese', flagIcon: jpFlag },
+  { id: 'ko', label: 'Korean', flagIcon: krFlag },
+  { id: 'pt', label: 'Portuguese', flagIcon: ptFlag },
+  { id: 'it', label: 'Italian', flagIcon: itFlag },
+  { id: 'ar', label: 'Arabic', flagIcon: saFlag },
+  { id: 'hi', label: 'Hindi', flagIcon: inFlag },
+  { id: 'tr', label: 'Turkish', flagIcon: trFlag },
+  { id: 'ru', label: 'Russian', flagIcon: ruFlag },
+  { id: 'vi', label: 'Vietnamese', flagIcon: vnFlag },
+  { id: 'th', label: 'Thai', flagIcon: thFlag },
 ]
 
 const sourceLanguageByScenario: Record<PresetScenario['id'], string> = {
@@ -123,7 +138,7 @@ export default function VideoTranslationDemo() {
                 </button>
               </div>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="mt-3 grid grid-cols-6 gap-x-4 gap-y-4">
               {targetLanguages.map((item) => {
                 const active = item.id === activeLanguage
                 return (
@@ -132,13 +147,13 @@ export default function VideoTranslationDemo() {
                     type="button"
                     onClick={() => setActiveLanguage(item.id)}
                     title={item.label}
-                    className={`flex h-11 w-11 items-center justify-center rounded-full text-2xl transition ${active ? 'bg-cyan-500/85 ring-2 ring-cyan-200' : 'bg-slate-100/80 hover:bg-slate-100'}`}
+                    className={`flex h-11 w-11 items-center justify-center overflow-hidden rounded-full transition ${active ? 'bg-cyan-500/85 ring-2 ring-cyan-200' : 'bg-slate-100/80 hover:bg-slate-100'}`}
                   >
-                    {item.flag}
+                    <img src={item.flagIcon} alt={item.label} className="h-full w-full object-cover" loading="lazy" />
                   </button>
                 )
               })}
-              <div className="flex h-11 min-w-[58px] items-center justify-center rounded-full bg-slate-100/80 px-2 text-xs font-semibold text-slate-700">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-100/80 text-xs font-semibold text-slate-700">
                 +79
               </div>
             </div>

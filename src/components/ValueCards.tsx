@@ -3,7 +3,8 @@ import { valuePillars } from '../data/siteContent'
 
 export default function ValueCards() {
   return (
-    <section className="grid gap-4 md:grid-cols-3">
+    <section>
+      <div className="grid gap-4 md:grid-cols-3">
       {valuePillars.map((pillar) => (
         <article key={pillar.title} className="glass-card p-6 transition duration-300 hover:-translate-y-1">
           <h2 className="text-xl font-semibold text-white">{pillar.title}</h2>
@@ -13,6 +14,7 @@ export default function ValueCards() {
           </Link>
         </article>
       ))}
+      </div>
     </section>
   )
 }

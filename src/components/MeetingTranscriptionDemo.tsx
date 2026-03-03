@@ -113,6 +113,16 @@ export default function MeetingTranscriptionDemo() {
     [selectedDemoId],
   )
 
+  const speakerColorMap = useMemo(() => {
+    const colorClasses = ['text-cyan-200', 'text-violet-200', 'text-emerald-200', 'text-amber-200', 'text-sky-200']
+    const uniqueSpeakers = Array.from(new Set(transcript.map((segment) => segment.speaker)))
+
+    return uniqueSpeakers.reduce<Record<string, string>>((mapping, speaker, index) => {
+      mapping[speaker] = colorClasses[index % colorClasses.length]
+      return mapping
+    }, {})
+  }, [transcript])
+
   useEffect(() => {
     return () => {
       if (audioSrc.startsWith('blob:')) {
@@ -171,7 +181,7 @@ export default function MeetingTranscriptionDemo() {
         <p className="mt-2 max-w-3xl text-slate-300">
           {locale === 'en'
             ? 'Drag your meeting file to the left upload area or choose a demo file. Right side shows player and transcription.'
-            : '将会议文件拖入左侧上传区，或选择 Demo 文件；右侧展示播放器与转写结果。'}
+            : '将会议录音拖入左侧上传区，或选择示例文件；右侧可查看播放器与实时转写结果。'}
         </p>
       </div>
 
@@ -183,14 +193,14 @@ export default function MeetingTranscriptionDemo() {
               onClick={() => setLanguageMode('multi')}
               className={`rounded-full px-3 py-1 transition ${languageMode === 'multi' ? 'bg-cyan-400/25 text-cyan-100' : 'bg-slate-800/70 text-slate-300'}`}
             >
-              Multi-lingual
+              {locale === 'en' ? 'Multi-lingual' : '多语言'}
             </button>
             <button
               type="button"
               onClick={() => setLanguageMode('mono')}
               className={`rounded-full px-3 py-1 transition ${languageMode === 'mono' ? 'bg-cyan-400/25 text-cyan-100' : 'bg-slate-800/70 text-slate-300'}`}
             >
-              Mono-lingual
+              {locale === 'en' ? 'Mono-lingual' : '单语言'}
             </button>
           </div>
 
@@ -231,7 +241,7 @@ export default function MeetingTranscriptionDemo() {
               ))}
             </select>
             <button type="button" onClick={applyDemoFile} className="ghost-btn px-3 py-2 text-sm">
-              {locale === 'en' ? 'Use Demo' : '选择 Demo'}
+              {locale === 'en' ? 'Use Demo' : '加载示例'}
             </button>
           </div>
 
@@ -283,19 +293,23 @@ export default function MeetingTranscriptionDemo() {
               {locale === 'en' ? 'Transcription' : '转写结果'}
             </p>
             <div className="mb-2 grid grid-cols-[110px_90px_1fr] gap-2 border-b border-slate-700/70 pb-1 text-[11px] uppercase tracking-[0.08em] text-cyan-200">
-              <span>Speaker</span>
-              <span>Duration</span>
+              <span>{locale === 'en' ? 'Speaker' : '说话人'}</span>
+              <span>{locale === 'en' ? 'Time' : '时间'}</span>
               <span>{locale === 'en' ? 'Transcription' : '转写文本'}</span>
             </div>
             <div className="h-56 overflow-y-scroll text-sm">
               {transcript.map((segment, index) => (
                 <div
                   key={`${segment.speaker}-${segment.time}-${index}`}
-                  className="grid grid-cols-[120px_95px_1fr] gap-2 border-b border-slate-800/70 py-1.5 text-sm text-slate-200 last:border-0"
+                  className="grid grid-cols-[120px_95px_1fr] gap-2 border-b border-slate-800/70 py-1.5 text-sm last:border-0"
                 >
-                  <span className="truncate text-cyan-200">{segment.speaker}</span>
+                  <span className={`truncate ${speakerColorMap[segment.speaker] ?? 'text-cyan-200'}`}>
+                    {locale === 'en' ? segment.speaker : segment.speaker.replace('Speaker', '发言人')}
+                  </span>
                   <span className="text-slate-400">{segment.time}</span>
-                  <span className="truncate text-[13px]">{locale === 'en' ? segment.textEn : segment.textZh}</span>
+                  <span className={`truncate text-[13px] ${speakerColorMap[segment.speaker] ?? 'text-slate-200'}`}>
+                    {locale === 'en' ? segment.textEn : segment.textZh}
+                  </span>
                 </div>
               ))}
             </div>

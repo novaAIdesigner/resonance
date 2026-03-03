@@ -18,14 +18,14 @@ export default function HomePage() {
       <TestimonialCarousel />
       <AccessSection />
 
-      <section className="glass-card p-6">
+      <section className="p-6">
         <h2 className="section-title">
-          {locale === 'en' ? 'Why Speech Studio + Resonance' : '为什么选择 Speech Studio + Resonance'}
+          {locale === 'en' ? 'Speech Services, Empowering Individuals and Enterprises.' : '语音服务，赋能个人与其企业。'}
         </h2>
         <p className="mt-2 text-slate-300">
           {locale === 'en'
-            ? 'Speech Studio solves discoverability and productization gaps with a direct experience layer, API-first workflow, and clear monetization paths.'
-            : 'Speech Studio 通过可体验入口、API 体系和清晰计费，解决了服务不可见与 2C 不友好的问题。'}
+            ? 'From trial to production and from individual creators to enterprise teams, build a complete speech service journey with lower integration cost and clearer growth paths.'
+            : '从体验试用到生产接入、从个人创作者到企业团队，构建完整语音服务闭环，降低接入成本并提升增长效率。'}
         </p>
 
         <div className="mt-5 grid gap-4 md:grid-cols-2">

@@ -50,7 +50,7 @@ export const scenarios: Scenario[] = [
     productHref: '/product/realtime-agent',
   },
   {
-    name: '视频素材生成（视频播客，配音）',
+    name: '视频素材生成，配音',
     description: '通过脚本自动生成旁白并输出多语言音轨。',
     endpoint: '/api/demo/video-voice',
     productHref: '/product/video-voice',
