@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useLocale } from '../context/LocaleContext'
 import usFlag from '../assets/flags/us.png'
 import deFlag from '../assets/flags/de.png'
@@ -100,12 +101,12 @@ export default function VideoTranslationDemo() {
                   </option>
                 ))}
               </select>
-              <a
-                href="/consumer-auth"
+              <Link
+                to="/consumer-auth"
                 className="rounded-lg border border-cyan-300/30 bg-slate-900/70 px-3 py-3 text-xs text-cyan-100 hover:border-cyan-300/60"
               >
                 {locale === 'en' ? 'Upload' : '上传'}
-              </a>
+              </Link>
             </div>
           </div>
 
