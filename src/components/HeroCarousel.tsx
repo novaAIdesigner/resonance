@@ -25,6 +25,8 @@ export default function HeroCarousel() {
   }
 
   const isExternalHref = current.href.startsWith('http')
+  const releaseTitle = locale === 'en' ? current.titleEn ?? current.title : current.titleZh ?? current.title
+  const releaseSummary = locale === 'en' ? current.summaryEn ?? current.summary : current.summaryZh ?? current.summary
 
   return (
     <section className="hero-shell">
@@ -32,8 +34,8 @@ export default function HeroCarousel() {
       <p className="mb-2 text-sm font-medium uppercase tracking-[0.22em] text-cyan-300">
         {locale === 'en' ? 'Latest Releases' : '最新发布'}
       </p>
-      <h1 className="text-3xl font-bold leading-tight text-white sm:text-5xl">{current.title}</h1>
-      <p className="mt-4 max-w-2xl text-slate-300">{current.summary}</p>
+      <h1 className="text-3xl font-bold leading-tight text-white sm:text-5xl">{releaseTitle}</h1>
+      <p className="mt-4 max-w-2xl text-slate-300">{releaseSummary}</p>
 
       <button type="button" onClick={goPrev} aria-label="Previous slide" className="hero-nav-btn left-2 sm:left-4">
         &lt;

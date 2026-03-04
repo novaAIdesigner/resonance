@@ -24,7 +24,7 @@ const personas: DemoPersona[] = [
     key: 'travel',
     labelZh: 'Deb · 旅行顾问',
     labelEn: 'Deb · Travel Agent',
-    roleZh: 'Deb - your travel agent',
+    roleZh: 'Deb - 你的旅行顾问',
     roleEn: 'Deb - your travel agent',
     tone: 'from-fuchsia-400/35 via-cyan-300/15 to-transparent',
     image: debAvatar,
@@ -33,7 +33,7 @@ const personas: DemoPersona[] = [
     key: 'teacher',
     labelZh: 'Nora · 语言老师',
     labelEn: 'Nora · Language Teacher',
-    roleZh: 'Nora - your language teacher',
+    roleZh: 'Nora - 你的语言老师',
     roleEn: 'Nora - your language teacher',
     tone: 'from-teal-400/35 via-sky-300/15 to-transparent',
     image: noraAvatar,
@@ -42,7 +42,7 @@ const personas: DemoPersona[] = [
     key: 'pizza',
     labelZh: 'Milo · 点餐助手',
     labelEn: 'Milo · Pizza Ordering',
-    roleZh: 'Bob - your pizza ordering assistant',
+    roleZh: 'Bob - 你的点餐助手',
     roleEn: 'Bob - your pizza ordering assistant',
     tone: 'from-amber-400/30 via-rose-300/15 to-transparent',
     image: bobAvatar,
@@ -92,7 +92,11 @@ export default function RealtimeAgentDemo() {
             ? 'I can plan your trip with voice and map-ready suggestions in real time.'
             : '我可以实时用语音为你规划行程并给出可执行建议。'
 
-    setMessages((prev) => [...prev, seed ? `You: ${seed}` : locale === 'en' ? 'You started speaking...' : '你开始说话…', `${current.roleEn}: ${base}`])
+    setMessages((prev) => [
+      ...prev,
+      seed ? `You: ${seed}` : locale === 'en' ? 'You started speaking...' : '你开始说话…',
+      `${locale === 'en' ? current.roleEn : current.roleZh}: ${base}`,
+    ])
   }
 
   function onSpeak() {
@@ -146,7 +150,7 @@ export default function RealtimeAgentDemo() {
             ) : null}
           </div>
           <div className="mt-4 text-center">
-            <p className="text-sm font-medium text-white">{current.roleZh}</p>
+            <p className="text-sm font-medium text-white">{locale === 'en' ? current.roleEn : current.roleZh}</p>
           </div>
         </div>
 

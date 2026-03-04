@@ -52,10 +52,10 @@ const targetLanguages: LanguageOption[] = [
   { id: 'th', label: 'Thai', flagIcon: thFlag },
 ]
 
-const sourceLanguageByScenario: Record<PresetScenario['id'], string> = {
-  podcast: 'English',
-  drama: '中文',
-  course: 'Español',
+const sourceLanguageByScenario: Record<PresetScenario['id'], { zh: string; en: string }> = {
+  podcast: { zh: '英语', en: 'English' },
+  drama: { zh: '中文', en: 'Chinese' },
+  course: { zh: '西班牙语', en: 'Spanish' },
 }
 
 const previewFrame =
@@ -67,7 +67,7 @@ export default function VideoTranslationDemo() {
   const [activeLanguage, setActiveLanguage] = useState<LanguageOption['id']>('de')
   const [voiceCloneEnabled, setVoiceCloneEnabled] = useState(true)
 
-  const sourceLanguage = sourceLanguageByScenario[activeScenario]
+  const sourceLanguage = locale === 'en' ? sourceLanguageByScenario[activeScenario].en : sourceLanguageByScenario[activeScenario].zh
 
   return (
     <div className="relative z-10">

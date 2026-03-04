@@ -14,14 +14,16 @@ export default function TestimonialCarousel() {
   }, [])
 
   const item = testimonials[index]
+  const customer = locale === 'en' ? item.customerEn ?? item.customer : item.customerZh ?? item.customer
+  const quote = locale === 'en' ? item.quoteEn ?? item.quote : item.quoteZh ?? item.quote
 
   return (
     <section className="testimonial-shell p-6">
       <p className="text-sm font-medium uppercase tracking-[0.2em] text-cyan-300">
         {locale === 'en' ? 'Customer Stories' : '客户案例与证言'}
       </p>
-      <blockquote className="mt-3 text-xl text-slate-100">“{item.quote}”</blockquote>
-      <p className="mt-2 text-sm text-slate-400">— {item.customer}</p>
+      <blockquote className="mt-3 text-xl text-slate-100">“{quote}”</blockquote>
+      <p className="mt-2 text-sm text-slate-400">— {customer}</p>
     </section>
   )
 }
